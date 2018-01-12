@@ -6,7 +6,7 @@ Documentation=https://github.com/sorintlab/stolon/blob/master/doc/simplecluster.
 User={{ stolon_keeper_user }}
 Group={{ stolon_keeper_user }}
 Type=simple
-ExecStart={{ stolon_unarchive_prefix }}/stolon-v{{ stolon_version }}-linux-amd64/bin/stolon-keeper --cluster-name {{ stolon_cluster_name }} --store-backend={{ stolon_store_backend }} --store-endpoints="{% for host in groups[etcd_cluster_group_name] %}http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2379,{% endfor %}" --uid {{ stolon_postgres_uid }} --data-dir /var/lib/stolon/data/{{ stolon_postgres_uid }} --pg-su-password={{ stolon_pg_su_password }} --pg-repl-username=repluser --pg-repl-password={{ stolon_pg_repl_password }}
+ExecStart={{ stolon_unarchive_prefix }}/stolon-v{{ stolon_version }}-linux-amd64/bin/stolon-keeper --cluster-name {{ stolon_cluster_name }} --store-backend={{ stolon_store_backend }} --store-endpoints="{% for host in groups[etcd_cluster_group_name] %}http://{{ hostvars[host]['ansible_default_ipv4']['address'] }}:2379,{% endfor %}" --uid {{ stolon_postgres_uid }} --data-dir /var/lib/stolon/data/{{ stolon_postgres_uid }} --pg-su-password={{ stolon_pg_su_password }} --pg-repl-username=repluser --pg-repl-password={{ stolon_pg_repl_password }} --pg-bin-path=/usr/lib/postgresql/{{ postgres_version }}/bin
 StandardOutput=journal
 StandardError=journal
 Restart=always
